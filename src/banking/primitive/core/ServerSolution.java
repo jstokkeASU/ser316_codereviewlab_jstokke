@@ -18,6 +18,7 @@ class ServerSolution implements AccountServer {
 		accountMap = new HashMap<String,Account>();
 		File file = new File(fileName);
 		ObjectInputStream in = null;
+		System.out.println("1");
 		try {
 			if (file.exists()) {
 				System.out.println("Reading from file " + fileName + "...");
@@ -27,6 +28,7 @@ class ServerSolution implements AccountServer {
 				int size = sizeI.intValue();
 				for (int i=0; i < size; i++) {
 					Account acc = (Account) in.readObject();
+					System.out.println("1.a: "+i);
 					if (acc != null)
 						accountMap.put(acc.getName(), acc);
 				}
@@ -56,7 +58,8 @@ class ServerSolution implements AccountServer {
 		throws IllegalArgumentException {
 		
 		if (balance < 0.0f) throw new IllegalArgumentException("New account may not be started with a negative balance");
-		if (accountMap.get(name) != null) return false;
+		if (accountMap.get(name) != null) {
+      return false;
 		
 		Account acc;
 		if ("Checking".equals(type)) {
